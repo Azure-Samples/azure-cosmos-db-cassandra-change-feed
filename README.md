@@ -3,62 +3,49 @@ page_type: sample
 languages:
 - csharp
 products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
+- azure
+description: "Azure Cosmos DB's API for Cassandra - Change Feed Sample"
+urlFragment: cassandra-change-feed
 ---
 
-# Official Microsoft Sample
+# Using the Change Feed with Azure Cosmos DB's API for Cassandra
+Azure Cosmos DB is Microsoft's globally distributed multi-model database service. You can quickly create and query document, table, key-value, and graph databases, all of which benefit from the global distribution and horizontal scale capabilities at the core of Azure Cosmos DB. 
+This quick start demonstrates how to interact with the Change Feed API using Azure Cosmos DB's API for Cassandra
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+## Running this sample
+* Before you can run this sample, you must have the following perquisites:
+	* An active Azure Cassandra API account - If you don't have an account, refer to the [Create Cassandra API account](https://docs.microsoft.com/en-us/azure/cosmos-db/create-cassandra-dotnet). 
+	* [Microsoft Visual Studio](https://www.visualstudio.com).
+	* [Git](http://git-scm.com/).
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
+1. Clone this repository using `git clone https://github.com/Azure-Samples/azure-cosmos-db-cassandra-dhange-feed.git`
 
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
+2. Open the CassandraChangeFeedSample.sln solution and install the Cassandra .NET driver. Use the .NET Driver's NuGet package. From the Package Manager Console window in Visual Studio:
 
-Give a short description for your sample here. What does it do and why is it important?
+```bash
+PM> Install-Package CassandraCSharpDriver
+```
 
-## Contents
+3. Next, configure the endpoints in **Program.cs** for both DataGenerator and ChangeFeedSample projects:
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
+```
+private const string UserName = "<FILLME>"; 
+private const string Password = "<FILLME>";
+private const string CassandraContactPoint = "<FILLME>"; //  DnsName
+```
+4. Compile the project.
 
-| File/folder       | Description                                |
-|-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
+5. Set ChangeFeedSample as the startup project, run it. This will create Keyspace and table, and start querying the change feed (initially there will be zero documents returned).
 
-## Prerequisites
+6. While ChangeFeedSample is running, open the solution file again in a new Visual Studio instance. This time set DataGenerator as the start up project, and run it. 
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
+7. Go back to your open run window for ChangeFeedSample. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario. 
 
-## Setup
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+## About the code
+The code included in this sample is intended to demonstrate how to interract with the Change Feed using Azure Cosmos DB's API for Cassandra. The sample shows the Change Feed being queried iteratively, using paging state. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same Cassandra table.
 
-## Runnning the sample
+## More information
 
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
-
-## Key concepts
-
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
-
-## Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+- [Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction)
+- [Cassandra DB](http://cassandra.apache.org/)
