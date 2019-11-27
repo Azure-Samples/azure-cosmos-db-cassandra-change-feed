@@ -4,6 +4,7 @@ languages:
 - csharp
 products:
 - azure
+- azure-cosmos-db
 description: "Azure Cosmos DB's API for Cassandra - Change Feed Sample"
 urlFragment: cassandra-change-feed
 ---
