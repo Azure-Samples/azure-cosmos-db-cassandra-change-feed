@@ -19,9 +19,9 @@ namespace CassandraChangeFeedSample
     public class Program
     {
         // Cassandra Cluster Configs      
-        private const string UserName = "UserName";
-        private const string Password = "Password";
-        private const string CassandraContactPoint = "CassandraContactPoint";  // DnsName  
+        private const string UserName = "<FILLME>";
+        private const string Password = "<FILLME>";
+        private const string CassandraContactPoint = "<FILLME>";  // DnsName  
         private static int CassandraPort = 10350;
         private static ISession session;
 
@@ -83,7 +83,7 @@ namespace CassandraChangeFeedSample
                     {
                         Console.WriteLine("zero documents read");
                     }
-                    Thread.Sleep(300);
+                    Thread.Sleep(1000);
 
                 }
                 catch (Exception e)
@@ -116,7 +116,7 @@ namespace CassandraChangeFeedSample
             session.Execute("CREATE TABLE IF NOT EXISTS uprofile.user (user_id int PRIMARY KEY, user_name text, user_bcity text)");
             Console.WriteLine(String.Format("created table user"));
             //sleep to ensure Keyspace and table written before querying starts
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
         }      
     }
 }

@@ -8,15 +8,16 @@ using Cassandra.Mapping;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace DataGenerator
 {
     public class Program
     {
         // Cassandra Cluster Configs      
-        private const string UserName = "UserName";
-        private const string Password = "Password";
-        private const string CassandraContactPoint = "CassandraContactPoint";  // DnsName  
+        private const string UserName = "<FILLME>";
+        private const string Password = "<FILLME>";
+        private const string CassandraContactPoint = "<FILLME>";  // DnsName  
         private static int CassandraPort = 10350;
         public static void Main(string[] args)
         {
@@ -33,9 +34,18 @@ namespace DataGenerator
             int i = 0;
             while (true)
             {
-                Console.WriteLine("inserting record:" + i);
-                mapper.Insert<User>(new User(i, "record"+i, "record"+i));
-                i++;
+                try
+                {
+                    Thread.Sleep(250);
+                    Console.WriteLine("inserting record:" + i);
+                    mapper.Insert<User>(new User(i, "record" + i, "record" + i));
+                    i++;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error writing record:" + e);
+                }
+
             }
             
         }
