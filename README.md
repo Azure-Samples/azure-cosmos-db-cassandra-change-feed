@@ -21,11 +21,7 @@ This quick start demonstrates how to interact with the Change Feed API using Azu
 
 1. Clone this repository using `git clone https://github.com/azure-samples/azure-cosmos-db-cassandra-change-feed.git`
 
-2. Open the CassandraChangeFeedSample.sln solution and install the Cassandra .NET driver. Use the .NET Driver's NuGet package. From the Package Manager Console window in Visual Studio:
-
-```bash
-PM> Install-Package CassandraCSharpDriver
-```
+2. Open the CassandraChangeFeedSample.sln solution. This should automatically restore packages. 
 
 3. Next, configure the endpoints in **Program.cs** for both DataGenerator and ChangeFeedSample projects:
 
